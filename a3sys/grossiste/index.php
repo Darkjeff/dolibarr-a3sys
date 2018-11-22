@@ -111,9 +111,9 @@ $obj = new Sys3a($db);
 			$ttc = $value['Y']*$value['O'];
         
         	if ($value['AD'] == 1) {
-            $txtva = 3.8;
+            $txtva = 7.7;
             }else{	
-            $txtva = 8;
+            $txtva = 2.5;
             }
             
 			if(array_key_exists($value['H'], $data)){
