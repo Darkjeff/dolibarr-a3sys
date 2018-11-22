@@ -73,23 +73,23 @@ $obj = new Sys3a($db);
 		
 		foreach($file_array as $key => $value){
 			// var_dump($value['H']);continue;
-			if(!is_numeric($value['A'])){
+			if(!is_numeric($value['B'])){
 				continue;
 			}
 			// die($value['H']);
 			// var_dump($line);
-			$societe_id = $obj->check_code_client($value['A'], 1);
+			$societe_id = $obj->check_code_client($value['B'], 1);
 			
 			if(empty($societe_id)){
-				$code_company_error[$value['A']] = $value['A'];
+				$code_company_error[$value['B']] = $value['B'];
 				$error = true;
 				continue;
 			}
 			
-			$product_id = $obj->check_code_product($value['K'], 1);
+			$product_id = $obj->check_code_product($value['L'], 1);
 			
 			if(empty($product_id)){
-				$code_prd_error[$value['K']] = $value['K'];
+				$code_prd_error[$value['L']] = $value['L'];
 				$error = true;
 				continue;
 			}
@@ -108,15 +108,22 @@ $obj = new Sys3a($db);
 				continue;
 			}
 			$value['H'] = (int)$value['H'];
-			$ttc = $value['R']/$value['O'];
+			$ttc = $value['Y']*$value['O'];
+        
+        	if ($value['AD'] == 1) {
+            $txtva = 3.8;
+            }else{	
+            $txtva = 8;
+            }
+            
 			if(array_key_exists($value['H'], $data)){
 				$data[$value['H']]['products'][] = array(
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
-												'ttc' => $ttc,
-												't_ttc' => $value['R'],
-												'txtva' => 0
+												'ttc' => $value['Y'],
+												't_ttc' => $ttc,
+												'txtva' => $txtva
 											);
 				
 			}else{				
@@ -130,9 +137,9 @@ $obj = new Sys3a($db);
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
-												'ttc' => $ttc,
-												't_ttc' => $value['R'],
-												'txtva' => 0
+												'ttc' => $value['Y'],
+												't_ttc' => $ttc,
+												'txtva' => $txtva
 											);
 			}
 			

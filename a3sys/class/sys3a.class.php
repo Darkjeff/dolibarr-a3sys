@@ -178,6 +178,7 @@ class Sys3a  extends CommonObject
 			$sql.= ", date_valid";
 			$sql.= ", datef";
 			$sql.= ", fk_statut";
+        	$sql.= ", paye";
 			$sql.= ", fk_user_author";
 			$sql.= ")";
 			$sql.= " VALUES (";
@@ -189,6 +190,7 @@ class Sys3a  extends CommonObject
 			$sql.= ", '" . date('Y-m-d') . "'";
 			$sql.= ", '".$dateinvoice."'";
 			$sql.= ", 1";
+        	$sql.= ", 1";
 			$sql.= ", ".($user->id > 0 ? "'".$user->id."'":"null");
 			$sql.=")";
 			// echo $sql."<br>";
