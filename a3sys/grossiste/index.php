@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* <one line to give the program's name and a brief idea of what it does.>
  * Copyright (C) <2017> SaaSprov.ma <saasprov@gmail.com>
  *
@@ -100,7 +100,19 @@ $obj = new Sys3a($db);
 				continue;
 			}
 			
-			$inv = $obj->check_code_invoice($value['H'], 1);
+			if(empty($value['I'])){
+				$autres[$key] = $value['I'];
+				$error = true;
+				continue;
+			}
+			
+			$codeinvoice = $value['I'] ."-". $value['H'] ;
+			
+			
+			
+			//var_dump($codeinvoice);
+			//$inv = $obj->check_code_invoice($value['H'], 1);
+			$inv = $obj->check_code_invoice($codeinvoice, 1);
 			
 			if(!empty($inv)){
 				$code_inv_error[$value['H']] = $value['H'];
@@ -116,8 +128,10 @@ $obj = new Sys3a($db);
             $txtva = 2.5;
             }
             
-			if(array_key_exists($value['H'], $data)){
-				$data[$value['H']]['products'][] = array(
+			//if(array_key_exists($value['H'], $data)){
+			if(array_key_exists($codeinvoice, $data)){
+				//$data[$value['H']]['products'][] = array(
+				$data[$codeinvoice]['products'][] = array(
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
@@ -127,13 +141,16 @@ $obj = new Sys3a($db);
 											);
 				
 			}else{				
-				$data[$value['H']] = array( 
+				//$data[$value['H']] = array( 
+				$data[$codeinvoice] = array( 
 									'societe_id' => $societe_id,
-									'n_fact' => $value['H'],
+									//'n_fact' => $value['H'],
+									'n_fact' => $codeinvoice,
 									'd_fact' => $value['I']
 									);
 									
-				$data[$value['H']]['products'][] = array(
+				//$data[$value['H']]['products'][] = array(
+				$data[$codeinvoice]['products'][] = array(
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
