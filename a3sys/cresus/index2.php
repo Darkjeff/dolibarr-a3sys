@@ -39,10 +39,7 @@ $obj = new Sys3a($db);
  */
 
   if ($action == 'uploadtxt')
-   {
-		$file = $_FILES['ftxt']['tmp_name'];
-		$filename = $_FILES['ftxt']['name'];
-		// var_dump($filename);
+    {
 		$ext = pathinfo($filename, PATHINFO_EXTENSION);
 		
 		if($ext != 'txt'){
