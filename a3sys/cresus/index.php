@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* <one line to give the program's name and a brief idea of what it does.>
  * Copyright (C) <2017> SaaSprov.ma <saasprov@gmail.com>
  *
@@ -39,16 +39,16 @@ $obj = new Sys3a($db);
  */
 
   if ($action == 'uploadtxt')
-   {
-		$file = $_FILES['ftxt']['tmp_name'];
-		$filename = $_FILES['ftxt']['name'];
-		// var_dump($filename);
+    {
 		$ext = pathinfo($filename, PATHINFO_EXTENSION);
 		
+		/// try something else sometime don t work 
+		/*
 		if($ext != 'txt'){
 			$error = "le type du fichier est incompatible";
 			die($error);
 		}
+		*/
 		
 		$lines = file($_FILES['ftxt']['tmp_name'], FILE_IGNORE_NEW_LINES);
 		$listerror = array();
@@ -107,6 +107,11 @@ $obj = new Sys3a($db);
 				$error = true;
 				continue;
 			}
+			
+			$line[8] = (int)$line[8];
+			
+			var_dump($data) ;
+			
 			
 			if(array_key_exists($line[1], $data)){
 				$data[$line[1]]['products'][] = array(
