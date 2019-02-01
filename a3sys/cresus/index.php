@@ -108,9 +108,9 @@ $obj = new Sys3a($db);
 				continue;
 			}
 			
-			$line[8] = (int)$line[8];
+			$totalttc = $line[6]*$line[7];
 			
-			var_dump($data) ;
+			//var_dump($data) ;
 			
 			
 			if(array_key_exists($line[1], $data)){
@@ -119,7 +119,7 @@ $obj = new Sys3a($db);
 												'desc' => utf8_encode ($line[5]),
 												'qte' => $line[6],
 												'ttc' => $line[7],
-												't_ttc' => $line[8],
+												't_ttc' => $totalttc,
 												'txtva' => $line[9]
 											);
 				
@@ -135,7 +135,7 @@ $obj = new Sys3a($db);
 												'desc' => utf8_encode ($line[5]),
 												'qte' => $line[6],
 												'ttc' => $line[7],
-												't_ttc' => $line[8],
+												't_ttc' => $totalttc,
 												'txtva' => $line[9]
 											);
 			}
