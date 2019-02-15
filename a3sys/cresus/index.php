@@ -190,7 +190,7 @@ $obj = new Sys3a($db);
 		dol_fiche_end();
 	print '</form>';
 	
-	if(!empty($data)){
+	if(!empty($data) && empty($code_prd_error)){
 		echo '<pre><ul>';
 		foreach($data as $field=>$success){
 			echo '<li style="color:green;"> Facture enregistrée : '.$success['n_fact'].'</li>';
