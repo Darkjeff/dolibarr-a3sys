@@ -147,7 +147,7 @@ $obj = new Sys3a($db);
 		// var_dump($code_prd_error);
 		// var_dump($code_inv_error);
 		
-		if(!empty($data)){ // j'enregistre les factures
+		if(!empty($data) && empty($code_prd_error)){ // j'enregistre les factures
 		
 			$obj->save_invoice($data, $user);
 			$success = "Factures enregistrées";
