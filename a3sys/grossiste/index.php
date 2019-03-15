@@ -167,7 +167,7 @@ $obj = new Sys3a($db);
 		// var_dump($code_prd_error);
 		// var_dump($code_inv_error);
 		
-		if(!empty($data)){ // j'enregistre les factures
+		if(!empty($data) && empty($code_prd_error)){ // j'enregistre les factures sauf si pas de produit 
 			
 			// var_dump($data);
 			$obj->save_invoice($data, $user, 1);
