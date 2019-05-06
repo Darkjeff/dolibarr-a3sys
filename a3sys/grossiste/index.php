@@ -120,7 +120,7 @@ $obj = new Sys3a($db);
 				continue;
 			}
 			$value['H'] = (int)$value['H'];
-			$ttc = $value['Y']*$value['O'];
+			
         
         	if ($value['AD'] == 1) {
             $txtva = 7.7;
@@ -128,6 +128,9 @@ $obj = new Sys3a($db);
             $txtva = 2.5;
             }
             
+			$ttc = $value['Y'] * (1 + ($txtva / 100));
+			$tttc = $ttc * $value['O'];
+			
 			//if(array_key_exists($value['H'], $data)){
 			if(array_key_exists($codeinvoice, $data)){
 				//$data[$value['H']]['products'][] = array(
@@ -135,8 +138,8 @@ $obj = new Sys3a($db);
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
-												'ttc' => $value['Y'],
-												't_ttc' => $ttc,
+												'ttc' => $ttc,
+												't_ttc' => $tttc,
 												'txtva' => $txtva
 											);
 				
@@ -154,8 +157,8 @@ $obj = new Sys3a($db);
 												'prod_id' => $product_id,
 												'desc' => utf8_encode ($value['N']),
 												'qte' => $value['O'],
-												'ttc' => $value['Y'],
-												't_ttc' => $ttc,
+												'ttc' => $ttc,
+												't_ttc' => $tttc,
 												'txtva' => $txtva
 											);
 			}
